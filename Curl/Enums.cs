@@ -110,333 +110,131 @@ namespace LibCurlSharp {
     /// Status code returned from <see cref="Easy"/> functions.
     /// </summary>
     public enum CURLcode {
-        /// <summary>
-        /// All fine. Proceed as usual.
-        /// </summary>
         CURLE_OK = 0,
-        /// <summary>
-        /// Aborted by callback. An internal callback returned "abort"
-        /// to libcurl. 
-        /// </summary>
-        CURLE_ABORTED_BY_CALLBACK = 42,
-        /// <summary>
-        /// Internal error. A function was called in a bad order.
-        /// </summary>
-        CURLE_BAD_CALLING_ORDER = 44,
-        /// <summary>
-        /// Unrecognized transfer encoding.
-        /// </summary>
-        CURLE_BAD_CONTENT_ENCODING = 61,
-        /// <summary>
-        /// Attempting FTP resume beyond file size.
-        /// </summary>
-        CURLE_BAD_DOWNLOAD_RESUME = 36,
-        /// <summary>
-        /// Internal error. A function was called with a bad parameter.
-        /// </summary>
-        CURLE_BAD_FUNCTION_ARGUMENT = 43,
-        /// <summary>
-        /// Bad password entered. An error was signaled when the password was
-        /// entered. This can also be the result of a "bad password" returned
-        /// from a specified password callback. 
-        /// </summary>
-        CURLE_BAD_PASSWORD_ENTERED = 46,
-        /// <summary>
-        /// Failed to connect to host or proxy. 
-        /// </summary>
-        CURLE_COULDNT_CONNECT = 7,
-        /// <summary>
-        /// Couldn't resolve host. The given remote host was not resolved. 
-        /// </summary>
-        CURLE_COULDNT_RESOLVE_HOST = 6,
-        /// <summary>
-        /// Couldn't resolve proxy. The given proxy host could not be resolved.
-        /// </summary>
-        CURLE_COULDNT_RESOLVE_PROXY = 5,
-        /// <summary>
-        /// Very early initialization code failed. This is likely to be an
-        /// internal error or problem. 
-        /// </summary>
-        CURLE_FAILED_INIT = 2,
-        /// <summary>
-        /// Maximum file size exceeded.
-        /// </summary>
-        CURLE_FILESIZE_EXCEEDED = 63,
-        /// <summary>
-        /// A file given with FILE:// couldn't be opened. Most likely
-        /// because the file path doesn't identify an existing file. Did
-        /// you check file permissions? 
-        /// </summary>
-        CURLE_FILE_COULDNT_READ_FILE = 37,
-        /// <summary>
-        /// We were denied access when trying to login to an FTP server or
-        /// when trying to change working directory to the one given in the URL. 
-        /// </summary>
-        CURLE_FTP_ACCESS_DENIED = 9,
-        /// <summary>
-        /// An internal failure to lookup the host used for the new
-        /// connection.
-        /// </summary>
-        CURLE_FTP_CANT_GET_HOST = 15,
-        /// <summary>
-        /// A bad return code on either PASV or EPSV was sent by the FTP
-        /// server, preventing libcurl from being able to continue. 
-        /// </summary>
-        CURLE_FTP_CANT_RECONNECT = 16,
-        /// <summary>
-        /// The FTP SIZE command returned error. SIZE is not a kosher FTP
-        /// command, it is an extension and not all servers support it. This
-        /// is not a surprising error. 
-        /// </summary>
-        CURLE_FTP_COULDNT_GET_SIZE = 32,
-        /// <summary>
-        /// This was either a weird reply to a 'RETR' command or a zero byte
-        /// transfer complete. 
-        /// </summary>
-        CURLE_FTP_COULDNT_RETR_FILE = 19,
-        /// <summary>
-        /// libcurl failed to set ASCII transfer type (TYPE A).
-        /// </summary>
-        CURLE_FTP_COULDNT_SET_ASCII = 29,
-        /// <summary>
-        /// Received an error when trying to set the transfer mode to binary.
-        /// </summary>
-        CURLE_FTP_COULDNT_SET_BINARY = 17,
-        /// <summary>
-        /// FTP couldn't STOR file. The server denied the STOR operation.
-        /// The error buffer usually contains the server's explanation to this. 
-        /// </summary>
-        CURLE_FTP_COULDNT_STOR_FILE = 25,
-        /// <summary>
-        /// The FTP REST command returned error. This should never happen
-        /// if the server is sane. 
-        /// </summary>
-        CURLE_FTP_COULDNT_USE_REST = 31,
-        /// <summary>
-        /// The FTP PORT command returned error. This mostly happen when
-        /// you haven't specified a good enough address for libcurl to use.
-        /// See <see cref="CURLoption.CURLOPT_FTPPORT"/>. 
-        /// </summary>
-        CURLE_FTP_PORT_FAILED = 30,
-        /// <summary>
-        /// When sending custom "QUOTE" commands to the remote server, one
-        /// of the commands returned an error code that was 400 or higher. 
-        /// </summary>
-        CURLE_FTP_QUOTE_ERROR = 21,
-        /// <summary>
-        /// Requested FTP SSL level failed.
-        /// </summary>
-        CURLE_FTP_SSL_FAILED = 64,
-        /// <summary>
-        /// The FTP server rejected access to the server after the password
-        /// was sent to it. It might be because the username and/or the
-        /// password were incorrect or just that the server is not allowing
-        /// you access for the moment etc. 
-        /// </summary>
-        CURLE_FTP_USER_PASSWORD_INCORRECT = 10,
-        /// <summary>
-        /// FTP servers return a 227-line as a response to a PASV command.
-        /// If libcurl fails to parse that line, this return code is
-        /// passed back. 
-        /// </summary>
-        CURLE_FTP_WEIRD_227_FORMAT = 14,
-        /// <summary>
-        /// After having sent the FTP password to the server, libcurl expects
-        /// a proper reply. This error code indicates that an unexpected code
-        /// was returned. 
-        /// </summary>
-        CURLE_FTP_WEIRD_PASS_REPLY = 11,
-        /// <summary>
-        /// libcurl failed to get a sensible result back from the server as
-        /// a response to either a PASV or a EPSV command. The server is flawed. 
-        /// </summary>
-        CURLE_FTP_WEIRD_PASV_REPLY = 13,
-        /// <summary>
-        /// After connecting to an FTP server, libcurl expects to get a
-        /// certain reply back. This error code implies that it got a strange
-        /// or bad reply. The given remote server is probably not an
-        /// OK FTP server. 
-        /// </summary>
-        CURLE_FTP_WEIRD_SERVER_REPLY = 8,
-        /// <summary>
-        /// After having sent user name to the FTP server, libcurl expects a
-        /// proper reply. This error code indicates that an unexpected code
-        /// was returned. 
-        /// </summary>
-        CURLE_FTP_WEIRD_USER_REPLY = 12,
-        /// <summary>
-        /// After a completed file transfer, the FTP server did not respond a
-        /// proper "transfer successful" code. 
-        /// </summary>
-        CURLE_FTP_WRITE_ERROR = 20,
-        /// <summary>
-        /// Function not found. A required LDAP function was not found.
-        /// </summary>
-        CURLE_FUNCTION_NOT_FOUND = 41,
-        /// <summary>
-        /// Nothing was returned from the server, and under the circumstances,
-        /// getting nothing is considered an error.
-        /// </summary>
-        CURLE_GOT_NOTHING = 52,
-        /// <summary>
-        /// This is an odd error that mainly occurs due to internal confusion.
-        /// </summary>
-        CURLE_HTTP_POST_ERROR = 34,
-        /// <summary>
-        /// The HTTP server does not support or accept range requests.
-        /// </summary>
-        CURLE_HTTP_RANGE_ERROR = 33,
-        /// <summary>
-        /// This is returned if <see cref="CURLoption.CURLOPT_FAILONERROR"/>
-        /// is set TRUE and the HTTP server returns an error code that
-        /// is >= 400. 
-        /// </summary>
-        CURLE_HTTP_RETURNED_ERROR = 22,
-        /// <summary>
-        /// Interface error. A specified outgoing interface could not be
-        /// used. Set which interface to use for outgoing connections'
-        /// source IP address with <see cref="CURLoption.CURLOPT_INTERFACE"/>. 
-        /// </summary>
-        CURLE_INTERFACE_FAILED = 45,
-        /// <summary>
-        /// End-of-enumeration marker; do not use in client applications.
-        /// </summary>
-        CURLE_LAST = 67,
-        /// <summary>
-        /// LDAP cannot bind. LDAP bind operation failed.
-        /// </summary>
-        CURLE_LDAP_CANNOT_BIND = 38,
-        /// <summary>
-        /// Invalid LDAP URL.
-        /// </summary>
-        CURLE_LDAP_INVALID_URL = 62,
-        /// <summary>
-        /// LDAP search failed.
-        /// </summary>
-        CURLE_LDAP_SEARCH_FAILED = 39,
-        /// <summary>
-        /// Library not found. The LDAP library was not found.
-        /// </summary>
-        CURLE_LIBRARY_NOT_FOUND = 40,
-        /// <summary>
-        /// Malformat user. User name badly specified. *Not currently used*
-        /// </summary>
-        CURLE_MALFORMAT_USER = 24,
-        /// <summary>
-        /// This is not an error. This used to be another error code in an
-        /// old libcurl version and is currently unused. 
-        /// </summary>
-        CURLE_OBSOLETE = 50,
-        /// <summary>
-        /// Operation timeout. The specified time-out period was reached
-        /// according to the conditions. 
-        /// </summary>
-        CURLE_OPERATION_TIMEOUTED = 28,
-        /// <summary>
-        /// Out of memory. A memory allocation request failed. This is serious
-        /// badness and things are severely messed up if this ever occurs. 
-        /// </summary>
-        CURLE_OUT_OF_MEMORY = 27,
-        /// <summary>
-        /// A file transfer was shorter or larger than expected. This
-        /// happens when the server first reports an expected transfer size,
-        /// and then delivers data that doesn't match the previously
-        /// given size. 
-        /// </summary>
-        CURLE_PARTIAL_FILE = 18,
-        /// <summary>
-        /// There was a problem reading a local file or an error returned by
-        /// the read callback. 
-        /// </summary>
-        CURLE_READ_ERROR = 26,
-        /// <summary>
-        /// Failure with receiving network data.
-        /// </summary>
-        CURLE_RECV_ERROR = 56,
-        /// <summary>
-        /// Failed sending network data.
-        /// </summary>
-        CURLE_SEND_ERROR = 55,
-        /// <summary>
-        /// Sending the data requires a rewind that failed.
-        /// </summary>
-        CURL_SEND_FAIL_REWIND = 65,
-        /// <summary>
-        /// Share is in use.
-        /// </summary>
-        CURLE_SHARE_IN_USE = 57,
-        /// <summary>
-        /// Problem with the CA cert (path? access rights?) 
-        /// </summary>
-        CURLE_SSL_CACERT = 60,
-        /// <summary>
-        /// There's a problem with the local client certificate. 
-        /// </summary>
-        CURLE_SSL_CERTPROBLEM = 58,
-        /// <summary>
-        /// Couldn't use specified cipher. 
-        /// </summary>
-        CURLE_SSL_CIPHER = 59,
-        /// <summary>
-        /// A problem occurred somewhere in the SSL/TLS handshake. You really
-        /// want to use the <see cref="Easy.DebugFunction"/> delegate and read
-        /// the message there as it pinpoints the problem slightly more. It
-        /// could be certificates (file formats, paths, permissions),
-        /// passwords, and others. 
-        /// </summary>
-        CURLE_SSL_CONNECT_ERROR = 35,
-        /// <summary>
-        /// Failed to initialize SSL engine.
-        /// </summary>
-        CURLE_SSL_ENGINE_INITFAILED = 66,
-        /// <summary>
-        /// The specified crypto engine wasn't found. 
-        /// </summary>
-        CURLE_SSL_ENGINE_NOTFOUND = 53,
-        /// <summary>
-        /// Failed setting the selected SSL crypto engine as default!
-        /// </summary>
-        CURLE_SSL_ENGINE_SETFAILED = 54,
-        /// <summary>
-        /// The remote server's SSL certificate was deemed not OK.
-        /// </summary>
-        CURLE_SSL_PEER_CERTIFICATE = 51,
-        /// <summary>
-        /// A telnet option string was improperly formatted.
-        /// </summary>
-        CURLE_TELNET_OPTION_SYNTAX = 49,
-        /// <summary>
-        /// Too many redirects. When following redirects, libcurl hit the
-        /// maximum amount. Set your limit with
-        /// <see cref="CURLoption.CURLOPT_MAXREDIRS"/>. 
-        /// </summary>
-        CURLE_TOO_MANY_REDIRECTS = 47,
-        /// <summary>
-        /// An option set with <see cref="CURLoption.CURLOPT_TELNETOPTIONS"/>
-        /// was not recognized/known. Refer to the appropriate documentation. 
-        /// </summary>
-        CURLE_UNKNOWN_TELNET_OPTION = 48,
-        /// <summary>
-        /// The URL you passed to libcurl used a protocol that this libcurl
-        /// does not support. The support might be a compile-time option that
-        /// wasn't used, it can be a misspelled protocol string or just a
-        /// protocol libcurl has no code for. 
-        /// </summary>
-        CURLE_UNSUPPORTED_PROTOCOL = 1,
-        /// <summary>
-        /// The URL was not properly formatted. 
-        /// </summary>
-        CURLE_URL_MALFORMAT = 3,
-        /// <summary>
-        /// URL user malformatted. The user-part of the URL syntax was not
-        /// correct. 
-        /// </summary>
-        CURLE_URL_MALFORMAT_USER = 4,
-        /// <summary>
-        /// An error occurred when writing received data to a local file,
-        /// or an error was returned to libcurl from a write callback. 
-        /// </summary>
-        CURLE_WRITE_ERROR = 23,
+        CURLE_UNSUPPORTED_PROTOCOL = 1,    /* 1 */
+        CURLE_FAILED_INIT = 2,                              /* 2 */
+        CURLE_URL_MALFORMAT = 3,                    /* 3 */
+        CURLE_NOT_BUILT_IN = 4,                          /* 4 - [was obsoleted in August 2007 for
+                                                                               7.17.0, reused in April 2011 for 7.21.5] */
+        CURLE_COULDNT_RESOLVE_PROXY = 5,   /* 5 */
+        CURLE_COULDNT_RESOLVE_HOST = 6,      /* 6 */
+        CURLE_COULDNT_CONNECT = 7,               /* 7 */
+        CURLE_WEIRD_SERVER_REPLY = 8,             /* 8 */
+        CURLE_REMOTE_ACCESS_DENIED = 9,       /* 9 a service was denied by the server
+                                                                              due to lack of access - when login fails
+                                                                              this is not returned. */
+        CURLE_FTP_ACCEPT_FAILED = 10,             /* 10 - [was obsoleted in April 2006 for
+                                                                              7.15.4, reused in Dec 2011 for 7.24.0]*/
+        CURLE_FTP_WEIRD_PASS_REPLY = 11,       /* 11 */
+        CURLE_FTP_ACCEPT_TIMEOUT = 12,          /* 12 - timeout occurred accepting server
+                                                                              [was obsoleted in August 2007 for 7.17.0,
+                                                                              reused in Dec 2011 for 7.24.0]*/
+        CURLE_FTP_WEIRD_PASV_REPLY = 13,       /* 13 */
+        CURLE_FTP_WEIRD_227_FORMAT = 14,     /* 14 */
+        CURLE_FTP_CANT_GET_HOST = 15,            /* 15 */
+        CURLE_HTTP2 = 16,                                     /* 16 - A problem in the http2 framing layer.
+                                                                               [was obsoleted in August 2007 for 7.17.0,
+                                                                               reused in July 2014 for 7.38.0] */
+        CURLE_FTP_COULDNT_SET_TYPE = 17,       /* 17 */
+        CURLE_PARTIAL_FILE = 18,                          /* 18 */
+        CURLE_FTP_COULDNT_RETR_FILE = 19,      /* 19 */
+        CURLE_OBSOLETE20 = 20,                           /* 20 - NOT USED */
+        CURLE_QUOTE_ERROR = 21,                        /* 21 - quote command failure */
+        CURLE_HTTP_RETURNED_ERROR = 22,       /* 22 */
+        CURLE_WRITE_ERROR = 23,                         /* 23 */
+        CURLE_OBSOLETE24 = 24,                           /* 24 - NOT USED */
+        CURLE_UPLOAD_FAILED = 25,                     /* 25 - failed upload "command" */
+        CURLE_READ_ERROR = 26,                        /* 26 - couldn't open/read from file */
+        CURLE_OUT_OF_MEMORY = 27,               /* 27 */
+        /* Note: CURLE_OUT_OF_MEMORY may sometimes indicate a conversion error
+         instead of a memory allocation error if CURL_DOES_CONVERSIONS
+         is defined
+        */
+        CURLE_OPERATION_TIMEDOUT = 28,      /* 28 - the timeout time was reached */
+        CURLE_OBSOLETE29 = 29,                          /* 29 - NOT USED */
+        CURLE_FTP_PORT_FAILED = 30,                  /* 30 - FTP PORT operation failed */
+        CURLE_FTP_COULDNT_USE_REST = 31,      /* 31 - the REST command failed */
+        CURLE_OBSOLETE32 = 32,                          /* 32 - NOT USED */
+        CURLE_RANGE_ERROR = 33,                       /* 33 - RANGE "command" didn't work */
+        CURLE_HTTP_POST_ERROR = 34,                /* 34 */
+        CURLE_SSL_CONNECT_ERROR = 35,           /* 35 - wrong when connecting with SSL */
+        CURLE_BAD_DOWNLOAD_RESUME = 36,   /* 36 - couldn't resume download */
+        CURLE_FILE_COULDNT_READ_FILE = 37,     /* 37 */
+        CURLE_LDAP_CANNOT_BIND = 38,             /* 38 */
+        CURLE_LDAP_SEARCH_FAILED = 39,            /* 39 */
+        CURLE_OBSOLETE40 = 40,                            /* 40 - NOT USED */
+        CURLE_FUNCTION_NOT_FOUND = 41,        /* 41 */
+        CURLE_ABORTED_BY_CALLBACK = 42,         /* 42 */
+        CURLE_BAD_FUNCTION_ARGUMENT = 43,  /* 43 */
+        CURLE_OBSOLETE44 = 44,                             /* 44 - NOT USED */
+        CURLE_INTERFACE_FAILED = 45,                   /* 45 - CURLOPT_INTERFACE failed */
+        CURLE_OBSOLETE46 = 46,                             /* 46 - NOT USED */
+        CURLE_TOO_MANY_REDIRECTS = 47,           /* 47 - catch endless re-direct loops */
+        CURLE_UNKNOWN_OPTION = 48,                /* 48 - User specified an unknown option */
+        CURLE_TELNET_OPTION_SYNTAX = 49,        /* 49 - Malformed telnet option */
+        CURLE_OBSOLETE50 = 50,                            /* 50 - NOT USED */
+        CURLE_PEER_FAILED_VERIFICATION = 51,    /* 51 - peer's certificate or fingerprint
+                                                                                   wasn't verified fine */
+        CURLE_GOT_NOTHING = 52,                        /* 52 - when this is a specific error */
+        CURLE_SSL_ENGINE_NOTFOUND = 53,        /* 53 - SSL crypto engine not found */
+        CURLE_SSL_ENGINE_SETFAILED = 54,           /* 54 - can not set SSL crypto engine as
+                                                                                 default */
+        CURLE_SEND_ERROR = 55,                           /* 55 - failed sending network data */
+        CURLE_RECV_ERROR = 56,                           /* 56 - failure in receiving network data */
+        CURLE_OBSOLETE57 = 57,                            /* 57 - NOT IN USE */
+        CURLE_SSL_CERTPROBLEM = 58,                 /* 58 - problem with the local certificate */
+        CURLE_SSL_CIPHER = 59,                             /* 59 - couldn't use specified cipher */
+        CURLE_SSL_CACERT = 60,                            /* 60 - problem with the CA cert (path?) */
+        CURLE_BAD_CONTENT_ENCODING = 61,    /* 61 - Unrecognized/bad encoding */
+        CURLE_LDAP_INVALID_URL = 62,                 /* 62 - Invalid LDAP URL */
+        CURLE_FILESIZE_EXCEEDED = 63,                 /* 63 - Maximum file size exceeded */
+        CURLE_USE_SSL_FAILED = 64,                       /* 64 - Requested FTP SSL level failed */
+        CURLE_SEND_FAIL_REWIND = 65,                 /* 65 - Sending the data requires a rewind
+                                                                                 that failed */
+        CURLE_SSL_ENGINE_INITFAILED = 66,          /* 66 - failed to initialise ENGINE */
+        CURLE_LOGIN_DENIED = 67,                         /* 67 - user, password or similar was not
+                                                                                 accepted and we failed to login */
+        CURLE_TFTP_NOTFOUND = 68,                     /* 68 - file not found on server */
+        CURLE_TFTP_PERM = 69,                                /* 69 - permission problem on server */
+        CURLE_REMOTE_DISK_FULL = 70,                   /* 70 - out of disk space on server */
+        CURLE_TFTP_ILLEGAL = 71,                             /* 71 - Illegal TFTP operation */
+        CURLE_TFTP_UNKNOWNID = 72,                   /* 72 - Unknown transfer ID */
+        CURLE_REMOTE_FILE_EXISTS = 73,                 /* 73 - File already exists */
+        CURLE_TFTP_NOSUCHUSER = 74,                   /* 74 - No such user */
+        CURLE_CONV_FAILED = 75,                             /* 75 - conversion failed */
+        CURLE_CONV_REQD = 76,                               /* 76 - caller must register conversion
+                                                                                   callbacks using curl_easy_setopt options
+                                                                                   CURLOPT_CONV_FROM_NETWORK_FUNCTION,
+                                                                                   CURLOPT_CONV_TO_NETWORK_FUNCTION, and
+                                                                                   CURLOPT_CONV_FROM_UTF8_FUNCTION */
+        CURLE_SSL_CACERT_BADFILE = 77,                 /* 77 - could not load CACERT file, missing
+                                                                                   or wrong format */
+        CURLE_REMOTE_FILE_NOT_FOUND = 78,       /* 78 - remote file not found */
+        CURLE_SSH = 79,                                             /* 79 - error from the SSH layer, somewhat
+                                                                                    generic so the error message will be of
+                                                                                    interest when this has happened */
+        CURLE_SSL_SHUTDOWN_FAILED = 80,           /* 80 - Failed to shut down the SSL
+                                                                                        connection */
+        CURLE_AGAIN = 81,                                         /* 81 - socket is not ready for send/recv,
+                                                                                   wait till it's ready and try again (Added
+                                                                                    in 7.18.2) */
+        CURLE_SSL_CRL_BADFILE = 82,                        /* 82 - could not load CRL file, missing or
+                                                                                 wrong format (Added in 7.19.0) */
+        CURLE_SSL_ISSUER_ERROR = 83,                     /* 83 - Issuer check failed.  (Added in
+                                                                                     7.19.0) */
+        CURLE_FTP_PRET_FAILED = 84,                        /* 84 - a PRET command failed */
+        CURLE_RTSP_CSEQ_ERROR = 85,                     /* 85 - mismatch of RTSP CSeq numbers */
+        CURLE_RTSP_SESSION_ERROR = 86,               /* 86 - mismatch of RTSP Session Ids */
+        CURLE_FTP_BAD_FILE_LIST = 87,                      /* 87 - unable to parse FTP file list */
+        CURLE_CHUNK_FAILED = 88,                           /* 88 - chunk callback reported error */
+        CURLE_NO_CONNECTION_AVAILABLE = 89,  /* 89 - No connection available, the
+                                                                                    session will be queued */
+        CURLE_SSL_PINNEDPUBKEYNOTMATCH = 90, /* 90 - specified pinned public key did not
+                                                                                       match */
+        CURLE_SSL_INVALIDCERTSTATUS = 91,            /* 91 - invalid certificate status */
+        CURLE_HTTP2_STREAM = 92,                            /* 92 - stream error in HTTP/2 framing layer
+                                                                                      */
+        CURL_LAST = 93                                                 /* never use! */
     };
 
     /// <summary>
@@ -450,6 +248,10 @@ namespace LibCurlSharp {
         /// </summary>
         CURLPROXY_HTTP = 0,
         /// <summary>
+        ///  added in 7.19.4, force to use CONNECT
+        /// </summary>
+        CURLPROXY_HTTP_1_0 = 1,
+        /// <summary>
         /// Use if the proxy supports SOCKS4 user authentication. If you're
         /// unfamiliar with this, consult your network administrator.
         /// </summary>
@@ -458,7 +260,15 @@ namespace LibCurlSharp {
         /// Use if the proxy supports SOCKS5 user authentication. If you're
         /// unfamiliar with this, consult your network administrator.
         /// </summary>
-        CURLPROXY_SOCKS5 = 5
+        CURLPROXY_SOCKS5 = 5,
+        /// <summary>
+        ///  added in 7.18.0
+        /// </summary>
+        CURLPROXY_SOCKS4A = 6,
+        /// <summary>
+        /// Use the SOCKS5 protocol but pass along the host name rather than the IP address. added  in 7.18.0 
+        /// </summary>
+        CURLPROXY_SOCKS5_HOSTNAME = 7 
     };
 
     /// <summary>
@@ -1768,9 +1578,17 @@ namespace LibCurlSharp {
         /// </summary>
         CURL_HTTP_VERSION_1_1 = 2,
         /// <summary>
+        /// /* use version 2 for HTTPS, version 1.1 for HTTP */
+        /// </summary>
+        CURL_HTTP_VERSION_2TLS = 3,
+        /// <summary>
+        ////* please use HTTP 2 without HTTP/1.1 Upgrade */ 
+        /// </summary>
+        CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE,
+        /// <summary>
         /// Last entry in enumeration; do not use in application code.
         /// </summary>
-        CURL_HTTP_VERSION_LAST = 3
+        CURL_HTTP_VERSION_LAST = 4
     };
 
     /// <summary>
@@ -1821,7 +1639,7 @@ namespace LibCurlSharp {
         /// </summary>
         CURL_SSLVERSION_DEFAULT = 0,
         /// <summary>
-        /// Use TLS version 1.
+        /// Use TLS version 1.x
         /// </summary>
         CURL_SSLVERSION_TLSv1 = 1,
         /// <summary>
@@ -1834,9 +1652,21 @@ namespace LibCurlSharp {
         /// </summary>
         CURL_SSLVERSION_SSLv3 = 3,
         /// <summary>
+        /// Use TLS Version 1.0
+        /// </summary>
+        CURL_SSLVERSION_TLSv1_0 = 4,
+        /// <summary>
+        ///Use TLS Version 1.1
+        /// </summary>
+        CURL_SSLVERSION_TLSv1_1 = 5,
+        /// <summary>
+        ///  Use TLS Version 1.2
+        /// </summary>
+        CURL_SSLVERSION_TLSv1_2 = 6,
+        /// <summary>
         /// Last entry in enumeration; do not use in application code.
         /// </summary>
-        CURL_SSLVERSION_LAST = 4
+        CURL_SSLVERSION_LAST = 7
     };
 
     /// <summary>
@@ -1989,7 +1819,19 @@ namespace LibCurlSharp {
         /// If you'd like it to contain zero bytes, you need to set the
         /// length of the name with <c>CURLFORM_NAMELENGTH</c>. 
         /// </summary>
-        CURLFORM_PTRNAME = 2
+        CURLFORM_PTRNAME = 2,
+        /// <summary>
+        /// 
+        /// </summary>
+        CURLFORM_STREAM=19,
+        /// <summary>
+        /// /* added in 7.46.0, provide a curl_off_t length */
+        /// </summary>
+        CURLFORM_CONTENTLEN = 20,
+        /// <summary>
+        ///  /* the last unused */
+        /// </summary>
+        CURLFORM_LASTENTRY = 21
     };
 
     /// <summary>
@@ -2107,10 +1949,7 @@ namespace LibCurlSharp {
         /// connect code for the HTTP request.
         /// </summary>
         CURLINFO_HTTP_CONNECTCODE = 0x200016,
-        /// <summary>
-        /// End-of-enumeration marker; do not use in client applications.
-        /// </summary>
-        CURLINFO_LASTONE = 0x1C,
+
         /// <summary>
         /// The second argument receives, as a <c>double</c>, the time, in
         /// seconds it took from the start until the name resolving was
@@ -2227,6 +2066,29 @@ namespace LibCurlSharp {
         /// you should add the <c>CURLINFO_CONNECT_TIME</c>. 
         /// </summary>
         CURLINFO_TOTAL_TIME = 0x300003,
+        CURLINFO_COOKIELIST=0x40001C,
+        CURLINFO_LASTSOCKET0x20001D,
+        CURLINFO_FTP_ENTRY_PATH= 0x10001E,
+        CURLINFO_REDIRECT_URL = 0x10001F,
+        CURLINFO_PRIMARY_IP = 0x100020,
+        CURLINFO_APPCONNECT_TIME= 0x300021,
+        CURLINFO_CERTINFO = 0x400022,
+        CURLINFO_CONDITION_UNMET = 0x200023,
+        CURLINFO_RTSP_SESSION_ID = 0x100024,
+        CURLINFO_RTSP_CLIENT_CSEQ = 0x200025,
+        CURLINFO_RTSP_SERVER_CSEQ = 0x200026,
+        CURLINFO_RTSP_CSEQ_RECV = 0x200027,
+        CURLINFO_PRIMARY_PORT = 0x200028,
+        CURLINFO_LOCAL_IP = 0x100029,
+        CURLINFO_LOCAL_PORT = 0x20002A,
+        CURLINFO_TLS_SESSION = 0x40002B,
+        CURLINFO_ACTIVESOCKET = 0x50002C,
+        CURLINFO_TLS_SSL_PTR = 0x40002D,
+        CURLINFO_HTTP_VERSION = 0x20002E,
+        /// <summary>
+        /// End-of-enumeration marker; do not use in client applications.
+        /// </summary>
+        CURLINFO_LASTONE = 0x2E,
     };
 
     /// <summary>
@@ -2384,9 +2246,13 @@ namespace LibCurlSharp {
         /// </summary>
         CURLSHE_NOMEM = 4,
         /// <summary>
+        ///  /* 5 feature not present in lib */
+        /// </summary>
+        CURLSHE_NOT_BUILT_IN = 5,
+        /// <summary>
         /// End-of-enumeration marker; do not use in application code.
         /// </summary>
-        CURLSHE_LAST = 5
+        CURLSHE_LAST = 6
     };
 
     /// <summary>
@@ -2450,14 +2316,16 @@ namespace LibCurlSharp {
         /// Capabilities associated with the third version of libcurl.
         /// </summary>
         CURLVERSION_THIRD = 2,
+
+        CURLVERSION_FOURTH=3,
         /// <summary>
         /// Same as <c>CURLVERSION_THIRD</c>.
         /// </summary>
-        CURLVERSION_NOW = CURLVERSION_THIRD,
+        CURLVERSION_NOW = CURLVERSION_FOURTH,
         /// <summary>
         /// End-of-enumeration marker; do not use in application code.
         /// </summary>
-        CURLVERSION_LAST = 3
+        CURLVERSION_LAST = 4,
     };
 
     /// <summary>
@@ -2515,7 +2383,45 @@ namespace LibCurlSharp {
         /// libcurl was built with support for IDNA, domain names with
         /// international letters. 
         /// </summary>
-        CURL_VERSION_IDN = 0x400
+        CURL_VERSION_IDN = 0x400,
+        /// <summary>
+        /// /* Built against Windows SSPI */
+        /// </summary>
+        CURL_VERSION_SSPI = 0x800,
+        /// <summary>
+        /// /* Character conversions supported */
+        /// </summary>
+        CURL_VERSION_CONV = 0x1000,
+        /// <summary>
+        /// /* Debug memory tracking supported */
+        /// </summary>
+        CURL_VERSION_CURLDEBUG = 0x2000,
+        /// <summary>
+        /// /* TLS-SRP auth is supported */
+        /// </summary>
+        CURL_VERSION_TLSAUTH_SRP = 0x4000 ,
+        /// <summary>
+        /// /* NTLM delegation to winbind helper  is suported */
+        /// </summary>
+        CURL_VERSION_NTLM_WB = 0x8000,
+        ///  /* HTTP2 support built-in */
+        CURL_VERSION_HTTP2 = 0x10000,
+        /// <summary>
+        /// /* Built against a GSS-API library */
+        /// </summary>
+        CURL_VERSION_GSSAPI = 0x20000,
+        /// <summary>
+        /// /* Kerberos V5 auth is supported */
+        /// </summary>
+        CURL_VERSION_KERBEROS5=0x40000,
+        /// <summary>
+        /// /* Unix domain sockets support */
+        /// </summary>
+        CURL_VERSION_UNIX_SOCKETS =0x80000 ,
+        /// <summary>
+        ///  /* Mozilla's Public Suffix List, used
+        /// </summary>
+         CURL_VERSION_PSL = 0x200000,
     };
 
     /// <summary>
